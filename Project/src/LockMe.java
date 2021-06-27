@@ -95,7 +95,8 @@ public class LockMe {
     private static void searchFile(File fileDir) throws Exception {
         String fileName = getFileNameInput();
         File targetFile = new File(fileDir.toString() + "\\" + fileName);
-        if (targetFile.exists()) {
+        boolean fileExists = targetFile.exists();
+        if (fileExists) {
             System.out.println("File is found on current directory.");
         } else {
             throw new FileNotFoundException("No such file on current directory.");
@@ -106,7 +107,8 @@ public class LockMe {
     private static void removeFile(File fileDir) throws Exception {
         String fileName = getFileNameInput();
         File fileToRemove = new File(fileDir.toString() + "\\" + fileName);
-        if (fileToRemove.delete()) {
+        boolean fileRemoved = fileToRemove.delete();
+        if (fileRemoved) {
             System.out.println("File removed successfully.");
         } else {
             throw new FileNotFoundException("No such file under current directory.");
@@ -117,7 +119,8 @@ public class LockMe {
     private static void addFile(File filedir) throws Exception {
         String fileName = getFileNameInput();
         File newFile = new File(filedir.toString() + "\\" + fileName);
-        if (newFile.exists()) {
+        boolean fileAlreadyExists = newFile.exists();
+        if (fileAlreadyExists) {
             throw new FileAlreadyExistsException("File already exists in current directory.");
         } else {
             try {
@@ -158,7 +161,8 @@ public class LockMe {
     private static File changeDirectory(File fileDir) {
         String newDir = getDirectory();
         File newFileDir = new File(newDir);
-        if (!newFileDir.isDirectory()) {
+        boolean isDirectory = newFileDir.isDirectory();
+        if (!isDirectory) {
             System.out.println("Invalid directory entered, current directory remain unchanged");
             return fileDir;
         } else {
